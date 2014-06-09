@@ -19,10 +19,45 @@
     </head>
     <body>
     <div id="timeline-embed"></div>
-        <h1>Joy's Timeline</h1>
-        <% for @image in @images %>
-            <img src=<%=@image%> width="400">
-        <% end %>
-        <!-- BEGIN Timeline Embed -->
+        <script type="text/javascript">
+          var JOY = {};
+          JOY.images = "<%=@images%>";
+          var links = JOY.images.split(',');
+          events = [];
+
+          links.forEach(function(link){
+
+              var date = link.match(/(\d{4})(-|\/)(\d{2})(-|\/)(\d{2})/)[0].split("-").join(",");
+              var event = {
+                  'startDate' : date,
+                  'endDate' : date,
+                  'headline' : '开心的成长',
+                  'text' : '',
+                  'asset' : {
+                      'media' :link,
+                      'credit' : '',
+                      'caption' : ''
+                  }
+              };
+              events.push(event);
+          });
+
+          timelineJson = {
+              'timeline' : {
+                  'headline' :"Joy's timeline",
+                  'type' : 'default',
+                  'text' : '记录陈霂嫣成长的点点滴滴',
+                  'startDate' : '2014年5月3日',
+                  'date' : events
+              }
+          };
+
+          var timeline_config = {
+              width: "100%",
+              height: "100%",
+              source: timelineJson
+          };
+        </script>
+        <script type="text/javascript" src="build/js/storyjs-embed.js"></script>
     </body>
 </html>
