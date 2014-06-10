@@ -6,11 +6,10 @@ class IndexController < ApplicationController
     client = DropboxClient.new("ouIEkUpgbqAAAAAAAAASAel11n0kiwFIXmeO83AXOv-cCMkBWsIXV1NJBBmlXnAq")
     metadata =  client.metadata('/joy')
     contents = metadata['contents']
-    links = []
+    paths = []
     contents.each do |content|
-      path = client.media(content['path'])
-      links.push(path['url'])
+      paths.push(content['path'])
     end
-    @images = links.join(',')
+    @paths = paths.join(',')
   end
 end

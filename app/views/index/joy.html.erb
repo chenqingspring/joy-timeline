@@ -19,13 +19,46 @@
     </head>
     <body>
     <div id="timeline-embed"></div>
-        <script type="text/javascript">
-          var JOY = {};
-          JOY.images = "<%=@images%>";
-          var links = JOY.images.split(',');
-          events = [];
+    <script type="text/javascript" src="build/js/dropbox.js"></script>
+    <script type="text/javascript">
 
-          links.forEach(function(link){
+    </script>
+        <script type="text/javascript">
+            var client = new Dropbox.Client({
+                key: "41e7ki1qabbf2a7",
+                secret: "s7mt52bbav64rwn",
+                token: "ouIEkUpgbqAAAAAAAAASAel11n0kiwFIXmeO83AXOv-cCMkBWsIXV1NJBBmlXnAq"
+            });
+            // Try to finish OAuth authorization.
+            client.authenticate({interactive: false}, function (error) {
+                if (error) {
+                    alert('Authentication error: ' + error);
+                }
+            });
+
+            if (client.isAuthenticated()) {
+                // Client is authenticated. Display UI.
+            }
+
+
+
+
+          var JOY = {},
+              paths,
+              events = [];
+              thumbOptions = {};
+
+          JOY.paths = "<%=@paths%>";
+          paths = JOY.paths.split(',');
+          thumbOptions = {
+              png: true,
+              format:"png",
+              size: "l"
+          };
+
+            paths.forEach(function(path){
+
+              var link = client.thumbnailUrl(path, thumbOptions);
 
               var date = link.match(/(\d{4})(-|\/)(\d{2})(-|\/)(\d{2})/)[0].split("-").join(",");
               var event = {
