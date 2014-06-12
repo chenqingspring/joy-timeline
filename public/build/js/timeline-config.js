@@ -34,7 +34,6 @@ paths.forEach(function (path) {
         headLine = text[1];
     }
 
-    console.log(headLine);
     var event = {
         'startDate': date,
         'endDate': date,
