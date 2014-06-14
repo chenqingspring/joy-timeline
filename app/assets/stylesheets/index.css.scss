@@ -2,7 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#ds-thread,#disqus_thread {
+html,
+body {
+  height:100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+#ds-thread,
+#disqus_thread {
   margin-left: 5%;
   margin-right: 5%;
 }
