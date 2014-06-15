@@ -37,11 +37,11 @@ paths.forEach(function (path) {
         'startDate': formatedDate,
         'endDate': formatedDate,
         'headline': headLine,
-        'text': "<h4>第"+days.toString()+"天</h4>",
+        'text': '',
         'asset': {
             'media': link,
             'thumbnail': thumbnail,
-            'credit': date,
+            'credit': "<h4>第"+days.toString()+"天</h4>",
             'caption': ''
         }
     };
