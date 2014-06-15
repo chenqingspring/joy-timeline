@@ -41,7 +41,7 @@ paths.forEach(function (path) {
         'asset': {
             'media': link,
             'thumbnail': thumbnail,
-            'credit': "<h4>第"+days.toString()+"天</h4>",
+            'credit': "<p>第"+days.toString()+"天</p>",
             'caption': ''
         }
     };
