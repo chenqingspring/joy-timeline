@@ -20,25 +20,22 @@ thumbNailOptions = {
 paths.forEach(function (path) {
     var link,
         thumbnail,
-        date,
-        headLine = "开心的成长",
-        text;
+        headLine,
+        days,
+        date;
 
     link = client.thumbnailUrl(path, imageOptions);
     thumbnail = client.thumbnailUrl(path, thumbNailOptions);
 
     date = link.match(/(\d{4})(-|\/)(\d{2})(-|\/)(\d{2})/)[0].split("-").join(",");
-    text = decodeURI(link).match(/\%2B(.*)\./);
-
-    if (text && text[1]) {
-        headLine = text[1];
-    }
+    headLine = buildComments(link);
+    days = countDays(date);
 
     var event = {
         'startDate': date,
         'endDate': date,
         'headline': headLine,
-        'text': '',
+        'text': "<h4>第"+days.toString()+"天</h4>",
         'asset': {
             'media': link,
             'thumbnail': thumbnail,
@@ -48,6 +45,24 @@ paths.forEach(function (path) {
     };
     events.push(event);
 });
+
+function countDays(date) {
+    var birthDay,
+        photoDate;
+    photoDate = new Date(date);
+    birthDay = new Date("2014-05-03");
+    return Math.ceil((photoDate.getTime() - birthDay.getTime()) / (24 * 3600 * 1000)) + 1;
+}
+
+function buildComments(link) {
+    var comments = decodeURI(link).match(/\%2B(.*)\./),
+        headLine = "开心的成长";
+
+    if (comments && comments[1]) {
+        headLine = comments[1];
+    }
+    return headLine;
+}
 
 timelineJson = {
     'timeline': {
