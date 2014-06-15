@@ -22,18 +22,20 @@ paths.forEach(function (path) {
         thumbnail,
         headLine,
         days,
-        date;
+        date,
+        formatedDate;
 
     link = client.thumbnailUrl(path, imageOptions);
     thumbnail = client.thumbnailUrl(path, thumbNailOptions);
 
-    date = link.match(/(\d{4})(-|\/)(\d{2})(-|\/)(\d{2})/)[0].split("-").join(",");
+    date = link.match(/(\d{4})(-|\/)(\d{2})(-|\/)(\d{2})/)[0];
+    formatedDate = date.split("-").join(",");
     headLine = buildComments(link);
     days = countDays(date);
 
     var event = {
-        'startDate': date,
-        'endDate': date,
+        'startDate': formatedDate,
+        'endDate': formatedDate,
         'headline': headLine,
         'text': "<h4>第"+days.toString()+"天</h4>",
         'asset': {
