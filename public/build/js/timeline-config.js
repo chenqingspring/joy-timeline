@@ -79,5 +79,7 @@ timelineJson = {
 var timeline_config = {
     width: "100%",
     height: "100%",
+    lang: 'zh-tw',
+    start_at_end: true,
     source: timelineJson
 };
